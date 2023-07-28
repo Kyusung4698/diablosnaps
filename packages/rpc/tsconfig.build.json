@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.json",
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "cjs",
+        "esm",
+    ],
+    "compilerOptions": {
+        "outDir": "./cjs",
+    },
+}

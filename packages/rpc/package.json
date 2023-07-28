@@ -1,0 +1,31 @@
+{
+  "name": "@diablosnaps/rpc",
+  "version": "0.0.0",
+  "repository": "https://github.com/Kyusung4698/diablosnaps.git",
+  "author": "Kyusung4698",
+  "license": "MIT",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "default": {
+        "require": "./cjs/index.js",
+        "module": "./esm/index.js"
+      }
+    }
+  },
+  "types": "./cjs/index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ext .ts --fix",
+    "tsc": "tsc --noEmit",
+    "prebuild": "yarn clean",
+    "build": "yarn build:cjs && yarn build:esm",
+    "build:cjs": "tsc -p tsconfig.build.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "clean": "rimraf cjs esm"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@diablosnaps/common": "^0.1.0"
+  }
+}

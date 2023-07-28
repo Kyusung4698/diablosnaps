@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "declarationMap": true,
+        "skipLibCheck": true,
+        "lib": [
+            "es7",
+            "DOM"
+        ],
+        "target": "es6"
+    }
+}
