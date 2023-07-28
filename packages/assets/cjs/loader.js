@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadTranslations = exports.loadItems = exports.loadAffixes = exports.VERSION = void 0;
-exports.VERSION = '1.1.0.43333';
+exports.VERSION = '1.1.0.43487';
 function loadAffixes() {
     return __awaiter(this, void 0, void 0, function* () {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
