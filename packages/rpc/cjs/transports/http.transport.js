@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HttpTransport = void 0;
+const common_1 = require("@diablosnaps/common");
 const errors_1 = require("../errors");
 class HttpTransport {
     constructor() {
@@ -18,7 +19,7 @@ class HttpTransport {
     }
     connect() {
         return __awaiter(this, void 0, void 0, function* () {
-            const port = HttpTransport.MIN_PORT + (this.tries % 10);
+            const port = common_1.RPC.MIN_PORT + (this.tries % 10);
             try {
                 const controller = new AbortController();
                 const response$ = fetch(`http://localhost:${port}/connect`, {
@@ -60,8 +61,12 @@ class HttpTransport {
                 }
             }
             catch (error) {
-                // handle disconnect error
-                // this.port = -1;
+                if (error instanceof TypeError) {
+                    if (error.message === 'Failed to fetch') {
+                        this.port = -1;
+                        throw new errors_1.TransportError('Could not connect to RPC server.', errors_1.TransportErrorCode.ConnectionError);
+                    }
+                }
                 console.warn('Could not send RPC request.', error);
                 throw new errors_1.TransportError('Could not send RPC request.', errors_1.TransportErrorCode.InternalError);
             }
@@ -69,5 +74,3 @@ class HttpTransport {
     }
 }
 exports.HttpTransport = HttpTransport;
-HttpTransport.MIN_PORT = 6490;
-HttpTransport.MAX_PORT = 6499;

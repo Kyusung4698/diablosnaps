@@ -1,11 +1,24 @@
 # `@diablosnaps/common`
 
-> TODO: description
+Provides utility functions and shared types.
 
 ## Usage
 
-```
-const common = require('@diablosnaps/common');
+```ts
+import { Game } from '@diablosnaps/common';
 
-// TODO: DEMONSTRATE API
+Game.getItemName(...) // => '100,000 Steps'
+Game.getItemTypeLine(...) // => 'Ancestral Rare Bow'
+Game.getItemVariantText(...) // => 'Ancestral'
+Game.getItemQualityText(...) // => 'Rare'
+Game.getItemTypeText(...) // => 'Bow'
+Game.getItemAffixText(...) // => '+13 Maximum Mana'
+```
+
+## Installation
+
+```sh
+npm install @diablosnaps/common
+# or yarn
+yarn add @diablosnaps/common
 ```

@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { RPC } from '@diablosnaps/common';
 import { TransportError, TransportErrorCode } from '../errors';
 export class HttpTransport {
     constructor() {
@@ -15,7 +16,7 @@ export class HttpTransport {
     }
     connect() {
         return __awaiter(this, void 0, void 0, function* () {
-            const port = HttpTransport.MIN_PORT + (this.tries % 10);
+            const port = RPC.MIN_PORT + (this.tries % 10);
             try {
                 const controller = new AbortController();
                 const response$ = fetch(`http://localhost:${port}/connect`, {
@@ -57,13 +58,15 @@ export class HttpTransport {
                 }
             }
             catch (error) {
-                // handle disconnect error
-                // this.port = -1;
+                if (error instanceof TypeError) {
+                    if (error.message === 'Failed to fetch') {
+                        this.port = -1;
+                        throw new TransportError('Could not connect to RPC server.', TransportErrorCode.ConnectionError);
+                    }
+                }
                 console.warn('Could not send RPC request.', error);
                 throw new TransportError('Could not send RPC request.', TransportErrorCode.InternalError);
             }
         });
     }
 }
-HttpTransport.MIN_PORT = 6490;
-HttpTransport.MAX_PORT = 6499;
