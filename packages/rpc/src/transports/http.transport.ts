@@ -1,6 +1,6 @@
 import { RPC } from '@diablosnaps/common';
-import { TransportError, TransportErrorCode } from '../errors';
-import { Transport } from './transport';
+import { TransportError, TransportErrorCode } from '../errors.js';
+import { Transport } from './transport.js';
 
 export class HttpTransport implements Transport {
     private tries = 0;

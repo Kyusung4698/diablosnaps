@@ -1,5 +1,5 @@
 import { RPC } from '@diablosnaps/common';
-import { HttpTransport, Transport } from './transports';
+import { HttpTransport, Transport } from './transports/index.js';
 
 export class RPCClient {
     private _connectPromise: Promise<void>;

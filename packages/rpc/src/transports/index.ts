@@ -1,3 +1,3 @@
-export * from './http.transport';
-export * from './transport';
+export * from './http.transport.js';
+export * from './transport.js';
 

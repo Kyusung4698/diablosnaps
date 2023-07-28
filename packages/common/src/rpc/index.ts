@@ -1,2 +1,2 @@
-export * as RPC from './module';
+export * as RPC from './module.js';
 

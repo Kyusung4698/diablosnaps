@@ -1,4 +1,4 @@
-import { AffixId, AffixType, Affixes, ItemQuality, ItemType, ItemVariant, Items, Language, Translations } from './types';
+import { AffixId, AffixType, Affixes, ItemQuality, ItemType, ItemVariant, Items, Language, Translations } from './types/index.js';
 
 export function getItemName(
     id: string,

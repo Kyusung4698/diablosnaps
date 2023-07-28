@@ -1,4 +1,4 @@
-export * from './constants';
-export * from './methods';
-export * from './types';
+export * from './constants.js';
+export * from './methods.js';
+export * from './types.js';
 

@@ -1,1 +1,2 @@
-export * as Game from './module';
+export * as Game from './module.js';
+

@@ -1,4 +1,4 @@
-import { Game } from '../game';
+import { Game } from '../game/index.js';
 
 export interface BackpackItemDocument {
     id: string;

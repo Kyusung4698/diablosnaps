@@ -10,7 +10,7 @@
     ".": {
       "default": {
         "require": "./cjs/index.js",
-        "module": "./esm/index.js"
+        "import": "./esm/index.js"
       }
     }
   },
@@ -20,6 +20,7 @@
     "tsc": "tsc --noEmit",
     "prebuild": "yarn clean",
     "build": "yarn build:cjs && yarn build:esm",
+    "postbuild": "node ./../../scripts/postbuild.js",
     "build:cjs": "tsc -p tsconfig.build.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "clean": "rimraf cjs esm"

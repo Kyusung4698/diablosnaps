@@ -1,5 +1,5 @@
-import { Class } from './character';
-import { AffixId, Language } from './shared';
+import { Class } from './character.js';
+import { AffixId, Language } from './shared.js';
 
 export enum ItemType {
     Axe = 'Axe',

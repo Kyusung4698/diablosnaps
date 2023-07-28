@@ -1,4 +1,4 @@
-import { BackpackItemDocument, BackpackTag } from './types';
+import { BackpackItemDocument, BackpackTag } from './types.js';
 
 export enum Method {
     GetInfo = 'getinfo',
