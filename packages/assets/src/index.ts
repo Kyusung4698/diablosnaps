@@ -1,1 +1,2 @@
-export * as Assets from './module';
+export * as Assets from './module.js';
+
