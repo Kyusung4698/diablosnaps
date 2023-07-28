@@ -51,7 +51,7 @@ export class RPCClient {
         return await this._transport.send(RPC.Method.GetBackpackImage, params);
     }
 
-    public async getBackpackTags(): Promise<RPC.GetBackpackItemsResult> {
+    public async getBackpackTags(): Promise<RPC.GetBackpackTagsResult> {
         return await this._transport.send(RPC.Method.GetBackpackTags);
     }
 }
