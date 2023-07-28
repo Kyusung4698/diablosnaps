@@ -7,7 +7,10 @@
   "scripts": {
     "lint": "lerna run lint",
     "build": "lerna run build",
-    "version": "lerna version"
+    "version": "lerna version",
+    "version:major": "npm run version --major",
+    "version:minor": "npm run version --minor",
+    "version:patch": "npm run version --patch"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.2.0",
