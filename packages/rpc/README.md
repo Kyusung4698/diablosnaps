@@ -1,6 +1,7 @@
 # `@diablosnaps/rpc`
 
-Provides an RPC client to access the app locally (browser/node.js)
+Provides an RPC client to access the app locally (browser/node.js). 
+A live demo can be found [here](https://diablosnaps.com/demos/rpc).
 
 ## Usage
 
@@ -35,11 +36,6 @@ const image = await client.getBackpackImage({
 });
 // { dataURL: '...' }
 ```
-
-## Example
-
-A live example can be found on the [diablosnaps.com](https://diablosnaps.com/examples/rpc) website.
-
 
 ## Installation
 

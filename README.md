@@ -1,8 +1,6 @@
 # DIABLO SNAPS
 
-The DIABLO IV app for collectors and traders. DIABLO SNAPS crops, stores, and identifies your items automatically from your screen. So sharing them is only one step away!
-
-https://diablosnaps.com/
+A collection of packages to interact with the [DIABLO SNAPS](https://diablosnaps.com) app. See the individual packages for more information. If you have any questions, feel free to join our [Discord](https://link.diablosnaps.com/discord).
 
 ## Packages
 
