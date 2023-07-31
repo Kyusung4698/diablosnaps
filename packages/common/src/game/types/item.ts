@@ -32,6 +32,13 @@ export enum ItemType {
     // Elixir = 'Elixir',
 }
 
+export enum ItemSocketType {
+    Utility = 'Utility',
+    Offensive = 'Offensive',
+    Defensive = 'Defensive',
+    Universal = 'Universal',
+}
+
 export enum ItemQuality {
     Common = 'Normal',
     Magic = 'Magic',
@@ -81,4 +88,6 @@ export interface Item {
     affixes?: ItemBasicAffix[];
     legendaryAffix?: ItemLegendaryAffix;
     uniqueAffix?: ItemAffix;
+    // malignant
+    socketType?: ItemSocketType;
 }

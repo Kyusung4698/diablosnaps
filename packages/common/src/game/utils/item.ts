@@ -1,4 +1,4 @@
-import { AffixId, AffixType, Affixes, ItemQuality, ItemType, ItemVariant, Items, Language, Translations } from './types/index.js';
+import { AffixId, AffixType, Affixes, ItemQuality, ItemSocketType, ItemType, ItemVariant, Items, Language, Translations } from './../types/index.js';
 
 export function getItemName(
     id: string,
@@ -9,9 +9,9 @@ export function getItemName(
 }
 
 export function getItemTypeLine(
-    variant: ItemVariant,
-    quality: ItemQuality,
-    type: ItemType,
+    itemVariant: ItemVariant,
+    itemQuality: ItemQuality,
+    itemType: ItemType,
     language: Language,
     translations: Translations
 ): string {
@@ -40,45 +40,53 @@ export function getItemTypeLine(
     }
 
     return replaceVariables(format, {
-        variant: getItemVariantText(variant, language, translations) || '',
-        quality: getItemQualityText(quality, language, translations) || '',
-        type: getItemTypeText(type, language, translations) || '',
+        variant: getItemVariantText(itemVariant, language, translations) || '',
+        quality: getItemQualityText(itemQuality, language, translations) || '',
+        type: getItemTypeText(itemType, language, translations) || '',
     }).trim();
 }
 
 export function getItemVariantText(
-    variant: ItemVariant,
+    itemVariant: ItemVariant,
     language: Language,
     translations: Translations
 ): string {
-    return translations[language][`ItemQuality${variant}`];
+    return translations[language][`ItemQuality${itemVariant}`];
 }
 
 export function getItemQualityText(
-    quality: ItemQuality,
+    itemQuality: ItemQuality,
     language: Language,
     translations: Translations
 ): string {
-    return translations[language][`ItemQuality${quality}`];
+    return translations[language][`ItemQuality${itemQuality}`];
 }
 
 export function getItemTypeText(
-    type: ItemType,
+    itemType: ItemType,
     language: Language,
     translations: Translations
 ): string {
-    return translations[language][`ItemType${type}`];
+    return translations[language][`ItemType${itemType}`];
+}
+
+export function getItemSocketTypeText(
+    itemSocketType: ItemSocketType,
+    language: Language,
+    translations: Translations
+): string {
+    return translations[language][`ItemSocketType${itemSocketType}`];
 }
 
 export function getItemAffixText(
-    id: AffixId,
+    affixId: AffixId,
     language: Language,
-    type: AffixType,
+    affixType: AffixType,
     power: number,
     value: number,
     affixes: Affixes,
 ): string {
-    const definition = affixes.definitions[type][id];
+    const definition = affixes.definitions[affixType][affixId];
     if (!definition) {
         return '';
     }
