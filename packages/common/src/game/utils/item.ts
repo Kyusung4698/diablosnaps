@@ -85,6 +85,7 @@ export function getItemAffixText(
     power: number,
     value: number,
     affixes: Affixes,
+    placeholder = '#'
 ): string {
     const definition = affixes.definitions[affixType][affixId];
     if (!definition) {
@@ -113,9 +114,9 @@ export function getItemAffixText(
             const template = replaceVariables(description, {
                 value: range && hasValue
                     ? `${range.minValue + (range.maxValue - range.minValue) * value}`
-                    : '#',
+                    : placeholder,
             });
-            return executeFormulas(template, !hasValue);
+            return executeFormulas(template, !hasValue, placeholder);
         })
         .join(' ');
     return text;
@@ -176,7 +177,8 @@ function formatValue(
 
 function executeFormulas(
     template: string,
-    ignoreParserError: boolean
+    ignoreParserError: boolean,
+    placeholder = '#'
 ) {
     return template
         .replace(/\[([^\]]+)\]/g, (_, formula: string) => {
@@ -196,7 +198,7 @@ function executeFormulas(
                 if (!ignoreParserError) {
                     console.warn('Failed to parse expression', expression, error);
                 }
-                return formatValue('#', format);
+                return formatValue(placeholder, format);
             }
         });
 }
