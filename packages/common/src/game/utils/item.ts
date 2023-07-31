@@ -177,8 +177,8 @@ function formatValue(
 
 function executeFormulas(
     template: string,
-    ignoreParserError: boolean,
-    placeholder = '#'
+    ignoreExpression: boolean,
+    placeholder: string
 ) {
     return template
         .replace(/\[([^\]]+)\]/g, (_, formula: string) => {
@@ -190,14 +190,13 @@ function executeFormulas(
                     format = key;
                     return '';
                 });
-
+            if (ignoreExpression) {
+                return formatValue(placeholder, format);
+            }
             try {
                 const value: number = Function(`return ${expression}`)();
                 return formatValue(value, format);
             } catch (error) {
-                if (!ignoreParserError) {
-                    console.warn('Failed to parse expression', expression, error);
-                }
                 return formatValue(placeholder, format);
             }
         });
