@@ -1,6 +1,6 @@
 import { Game } from '@diablosnaps/common';
 
-export const VERSION = '1.1.0.43487';
+export const VERSION = '1.1.1.43794';
 
 export async function loadAffixes() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
