@@ -123,7 +123,7 @@ export function getItemAffixDescription(
                 value,
             );
         })
-        .join('\n');
+        .join('\r\n');
     return description;
 }
 
@@ -155,7 +155,6 @@ function formatValue(
             return `${typeof value === 'string' ? value : Math.round(value)}`;
         case '~%':
             return `${typeof value === 'string' ? value : Math.round(value)}%`;
-
         case '1':
             return `${typeof value === 'string' ? value : value.toFixed(1)}`;
         case '1%x':
@@ -165,7 +164,6 @@ function formatValue(
             return `${typeof value === 'string' ? value : value.toFixed(1)}%`;
         case '1%+':
             return `+${typeof value === 'string' ? value : value.toFixed(1)}%`;
-
         case '2':
             return `${typeof value === 'string' ? value : value.toFixed(2)}`;
         case '2%x':
@@ -175,7 +173,6 @@ function formatValue(
             return `${typeof value === 'string' ? value : value.toFixed(2)}%`;
         case '2%+':
             return `+${typeof value === 'string' ? value : value.toFixed(2)}%`;
-
         case '%x':
             return `${typeof value === 'string' ? value : roundValue(value, 3)}%[x]`;
         case '%':
