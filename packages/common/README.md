@@ -12,7 +12,8 @@ Game.getItemTypeLine(...) // => 'Ancestral Rare Bow'
 Game.getItemVariantText(...) // => 'Ancestral'
 Game.getItemQualityText(...) // => 'Rare'
 Game.getItemTypeText(...) // => 'Bow'
-Game.getItemAffixText(...) // => '+13 Maximum Mana'
+Game.getItemAffixName(...) // => 'Smiting'
+Game.getItemAffixDescription(...) // => '+13 Maximum Mana'
 ```
 
 ## Installation

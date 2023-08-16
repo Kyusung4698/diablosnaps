@@ -1,4 +1,15 @@
-import { AffixId, AffixType, Affixes, ItemQuality, ItemSocketType, ItemType, ItemVariant, Items, Language, Translations } from './../types/index.js';
+import {
+    Affixes,
+    AffixId,
+    AffixType,
+    ItemQuality,
+    Items,
+    ItemSocketType,
+    ItemType,
+    ItemVariant,
+    Language,
+    Translations,
+} from './../types/index.js';
 
 export function getItemName(
     id: string,
@@ -13,7 +24,7 @@ export function getItemTypeLine(
     itemQuality: ItemQuality,
     itemType: ItemType,
     language: Language,
-    translations: Translations
+    translations: Translations,
 ): string {
     let format = '{VARIANT} {QUALITY} {TYPE}';
     switch (language) {
@@ -49,7 +60,7 @@ export function getItemTypeLine(
 export function getItemVariantText(
     itemVariant: ItemVariant,
     language: Language,
-    translations: Translations
+    translations: Translations,
 ): string {
     return translations[language][`ItemQuality${itemVariant}`];
 }
@@ -57,7 +68,7 @@ export function getItemVariantText(
 export function getItemQualityText(
     itemQuality: ItemQuality,
     language: Language,
-    translations: Translations
+    translations: Translations,
 ): string {
     return translations[language][`ItemQuality${itemQuality}`];
 }
@@ -65,7 +76,7 @@ export function getItemQualityText(
 export function getItemTypeText(
     itemType: ItemType,
     language: Language,
-    translations: Translations
+    translations: Translations,
 ): string {
     return translations[language][`ItemType${itemType}`];
 }
@@ -73,58 +84,52 @@ export function getItemTypeText(
 export function getItemSocketTypeText(
     itemSocketType: ItemSocketType,
     language: Language,
-    translations: Translations
+    translations: Translations,
 ): string {
     return translations[language][`ItemSocketType${itemSocketType}`];
 }
 
-export function getItemAffixText(
+export function getItemAffixName(
+    affixType: AffixType,
     affixId: AffixId,
     language: Language,
-    affixType: AffixType,
-    power: number,
-    value: number,
     affixes: Affixes,
-    placeholder = '#'
 ): string {
     const definition = affixes.definitions[affixType][affixId];
     if (!definition) {
         return '';
     }
+    const name = affixes.names[language][definition.name];
+    return name;
+}
 
-    const text = definition.attributes
+export function getItemAffixDescription(
+    affixType: AffixType,
+    affixId: AffixId,
+    language: Language,
+    affixes: Affixes,
+    value = '#',
+): string {
+    const definition = affixes.definitions[affixType][affixId];
+    if (!definition) {
+        return '';
+    }
+    const description = definition.attributes
         .map(attribute => {
-
-            const { ranges } = affixes.attributes[attribute.id];
-            let range = ranges[0];
-            if (ranges.length > 1) {
-                for (let i = 1; i < ranges.length; i++) {
-                    if (ranges[i].minItemPower <= power &&
-                        ranges[i].minItemPower > range.minItemPower
-                    ) {
-                        range = ranges[i];
-                    }
-                }
-            }
-
-            const descriptionId = `${attribute.id}${isNaN(attribute.param) ? '' : `#${attribute.param}`}`;
-            const description = affixes.descriptions[language][descriptionId];
-
-            const hasValue = !isNaN(value) && value >= 0 && value <= 1;
-            const template = replaceVariables(description, {
-                value: range && hasValue
-                    ? `${range.minValue + (range.maxValue - range.minValue) * value}`
-                    : placeholder,
-            });
-            return executeFormulas(template, !hasValue, placeholder);
+            const attributeDescriptionId = `${attribute.id}${isNaN(attribute.param) ? '' : `#${attribute.param}`}`;
+            const attributeDescription = affixes.descriptions[language][attributeDescriptionId];
+            return executeFormulas(
+                replaceVariables(attributeDescription, { value }),
+                value,
+            );
         })
-        .join(' ');
-    return text;
+        .join('\n');
+    return description;
 }
 
 function replaceVariables(
     template: string,
-    variables: Record<string, string>
+    variables: Record<string, string>,
 ) {
     return template
         .replace(/\{([^}]+)\}/g, (_, key: string) => {
@@ -135,7 +140,7 @@ function replaceVariables(
 
 function roundValue(
     value: number,
-    decimals: number
+    decimals: number,
 ) {
     const factor = Math.pow(10, decimals);
     return Math.round(value * factor) / factor;
@@ -143,32 +148,43 @@ function roundValue(
 
 function formatValue(
     value: number | string,
-    format: string
+    format: string,
 ) {
     switch (format) {
-        case '~': return `${typeof value === 'string' ? value : Math.round(value)}`;
-        case '~%': return `${typeof value === 'string' ? value : Math.round(value)}%`;
+        case '~':
+            return `${typeof value === 'string' ? value : Math.round(value)}`;
+        case '~%':
+            return `${typeof value === 'string' ? value : Math.round(value)}%`;
 
-        case '1': return `${typeof value === 'string' ? value : value.toFixed(1)}`;
-        case '1%x': return `${typeof value === 'string' ? value : value.toFixed(1)}%[x]`;
+        case '1':
+            return `${typeof value === 'string' ? value : value.toFixed(1)}`;
+        case '1%x':
+            return `${typeof value === 'string' ? value : value.toFixed(1)}%[x]`;
         case '1%':
         case '%1':
             return `${typeof value === 'string' ? value : value.toFixed(1)}%`;
-        case '1%+': return `+${typeof value === 'string' ? value : value.toFixed(1)}%`;
+        case '1%+':
+            return `+${typeof value === 'string' ? value : value.toFixed(1)}%`;
 
-        case '2': return `${typeof value === 'string' ? value : value.toFixed(2)}`;
-        case '2%x': return `${typeof value === 'string' ? value : value.toFixed(2)}%[x]`;
+        case '2':
+            return `${typeof value === 'string' ? value : value.toFixed(2)}`;
+        case '2%x':
+            return `${typeof value === 'string' ? value : value.toFixed(2)}%[x]`;
         case '2%':
         case '%2':
             return `${typeof value === 'string' ? value : value.toFixed(2)}%`;
-        case '2%+': return `+${typeof value === 'string' ? value : value.toFixed(2)}%`;
+        case '2%+':
+            return `+${typeof value === 'string' ? value : value.toFixed(2)}%`;
 
-        case '%x': return `${typeof value === 'string' ? value : roundValue(value, 3)}%[x]`;
-        case '%': return `${typeof value === 'string' ? value : roundValue(value, 3)}%`;
+        case '%x':
+            return `${typeof value === 'string' ? value : roundValue(value, 3)}%[x]`;
+        case '%':
+            return `${typeof value === 'string' ? value : roundValue(value, 3)}%`;
         case '+%':
         case '%+':
             return `+${typeof value === 'string' ? value : roundValue(value, 3)}%`;
-        case '': return `${typeof value === 'string' ? value : roundValue(value, 3)}`;
+        case '':
+            return `${typeof value === 'string' ? value : roundValue(value, 3)}`;
         default:
             console.warn('Unknown format', format);
             return `${typeof value === 'string' ? value : roundValue(value, 3)}`;
@@ -177,27 +193,18 @@ function formatValue(
 
 function executeFormulas(
     template: string,
-    ignoreExpression: boolean,
-    placeholder: string
+    value: string,
 ) {
     return template
         .replace(/\[([^\]]+)\]/g, (_, formula: string) => {
             if (formula === 'x') return '[x]';
             let format = '';
-            const expression = formula
+            formula
                 .replace(/\}/g, '')
                 .replace(/\|([^|]+)\|/g, (_, key) => {
                     format = key;
                     return '';
                 });
-            if (ignoreExpression) {
-                return formatValue(placeholder, format);
-            }
-            try {
-                const value: number = Function(`return ${expression}`)();
-                return formatValue(value, format);
-            } catch (error) {
-                return formatValue(placeholder, format);
-            }
+            return formatValue(value, format);
         });
 }

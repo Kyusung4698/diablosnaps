@@ -9,7 +9,7 @@ import { Assets } from '@diablosnaps/assets';
 import { Game } from '@diablosnaps/common';
 
 const affixes = await Assets.loadAffixes();
-const affixText = Game.getItemAffixText('577013', Game.Language.English, Game.AffixType.Basic, 800, 1, affixes);
+const affixDescription = Game.getItemAffixDescription(Game.AffixType.Basic, '577013', Game.Language.English, affixes, '13');
 // => '+13 Maximum Mana'
 
 const items = await Assets.loadItems();

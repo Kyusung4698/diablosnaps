@@ -16,6 +16,7 @@ export enum Language {
 }
 
 export type AffixId = string;
+export type AffixName = string;
 export enum AffixType {
     Basic = 'basic',
     Legendary = 'legendary',
@@ -29,7 +30,7 @@ export interface AttributeDefinition {
 }
 
 export interface AffixDefinition {
-    name: string;
+    name: AffixName;
     attributes: AttributeDefinition[];
 }
 
@@ -45,7 +46,7 @@ export interface Attribute {
 
 export interface Affixes {
     definitions: Record<AffixType, Record<AffixId, AffixDefinition>>;
-    attributes: Record<AttributeId, Attribute>;
+    names: Record<Language, Record<AffixName, string>>;
     descriptions: Record<Language, Record<AttributeId, string>>;
 }
 
