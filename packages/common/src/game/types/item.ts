@@ -27,7 +27,6 @@ export enum ItemType {
     Legs = 'Legs',
     Ring = 'Ring',
     Shield = 'Shield',
-
     // Gem = 'Gem',
     // Elixir = 'Elixir',
 }
@@ -46,7 +45,6 @@ export enum ItemQuality {
     Legendary = 'Legendary',
     // Set = 'Set',
     Unique = 'Unique',
-
     // Artifact = 'Artifact',
     // Cosmetic = 'Cosmetic',
 }

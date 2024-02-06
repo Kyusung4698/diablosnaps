@@ -3,5 +3,5 @@ export enum Class {
     Druid = 'Druid',
     Necromancer = 'Necromancer',
     Rogue = 'Rogue',
-    Sorcerer = 'Sorcerer'
+    Sorcerer = 'Sorcerer',
 }

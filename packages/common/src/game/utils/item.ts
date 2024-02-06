@@ -78,7 +78,7 @@ export function getItemTypeText(
     language: Language,
     translations: Translations,
 ): string {
-    return translations[language][`ItemType${itemType}`];
+    return translations[language][`ItemType${itemType?.toLocaleLowerCase()}`];
 }
 
 export function getItemSocketTypeText(
