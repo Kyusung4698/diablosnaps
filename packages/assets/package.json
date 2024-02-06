@@ -1,6 +1,6 @@
 {
   "name": "@diablosnaps/assets",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": "https://github.com/Kyusung4698/diablosnaps.git",
   "author": "Kyusung4698",
   "license": "MIT",
@@ -27,6 +27,6 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@diablosnaps/common": "^1.1.0"
+    "@diablosnaps/common": "^1.1.1"
   }
 }
