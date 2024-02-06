@@ -175,6 +175,8 @@ function formatValue(
             return `+${typeof value === 'string' ? value : value.toFixed(2)}%`;
         case '%x':
             return `${typeof value === 'string' ? value : roundValue(value, 3)}%[x]`;
+        case 'x%':
+            return `[x]${typeof value === 'string' ? value : roundValue(value, 3)}%`;
         case '%':
             return `${typeof value === 'string' ? value : roundValue(value, 3)}%`;
         case '+%':
